@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Mail\MensagemTesteMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+https://www.udemy.com/course/curso-completo-do-desenvolvedor-laravel/
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,3 +23,9 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('tarefa', 'App\Http\Controllers\TarefaController'); //->middleware('auth');
 //Route::resource('tarefa', 'TarefaController'); //Route service provider, descomentar
+
+Route::get('/mensagem-teste', function(){
+    //return new MensagemTesteMail();
+    Mail::to('thainaspiress2@gmail.com')->send(new MensagemTesteMail());
+    return 'Email enviado com sucesso';
+});
