@@ -18,10 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('tarefa', 'App\Http\Controllers\TarefaController'); //->middleware('auth');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+    ->name('home')
+    ->middleware('verified');
+Route::resource('tarefa', 'App\Http\Controllers\TarefaController')->middleware('verified');; //->middleware('auth');
 //Route::resource('tarefa', 'TarefaController'); //Route service provider, descomentar
 
 Route::get('/mensagem-teste', function(){
